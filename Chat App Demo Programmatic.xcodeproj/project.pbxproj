@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E2E1E1825AF001A374B /* AppDelegate.swift */; };
+		E0127E311E1825AF001A374B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E301E1825AF001A374B /* ViewController.swift */; };
+		E0127E341E1825AF001A374B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0127E321E1825AF001A374B /* Main.storyboard */; };
+		E0127E361E1825AF001A374B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0127E351E1825AF001A374B /* Assets.xcassets */; };
+		E0127E391E1825AF001A374B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0127E371E1825AF001A374B /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E0127E2B1E1825AF001A374B /* Chat App Demo Programmatic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chat App Demo Programmatic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0127E2E1E1825AF001A374B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E0127E301E1825AF001A374B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E0127E331E1825AF001A374B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E0127E351E1825AF001A374B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E0127E381E1825AF001A374B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E0127E3A1E1825AF001A374B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E0127E281E1825AF001A374B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E0127E221E1825AF001A374B = {
+			isa = PBXGroup;
+			children = (
+				E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */,
+				E0127E2C1E1825AF001A374B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E0127E2C1E1825AF001A374B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E0127E2B1E1825AF001A374B /* Chat App Demo Programmatic.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */ = {
+			isa = PBXGroup;
+			children = (
+				E0127E2E1E1825AF001A374B /* AppDelegate.swift */,
+				E0127E301E1825AF001A374B /* ViewController.swift */,
+				E0127E321E1825AF001A374B /* Main.storyboard */,
+				E0127E351E1825AF001A374B /* Assets.xcassets */,
+				E0127E371E1825AF001A374B /* LaunchScreen.storyboard */,
+				E0127E3A1E1825AF001A374B /* Info.plist */,
+			);
+			path = "Chat App Demo Programmatic";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E0127E2A1E1825AF001A374B /* Chat App Demo Programmatic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0127E3D1E1825AF001A374B /* Build configuration list for PBXNativeTarget "Chat App Demo Programmatic" */;
+			buildPhases = (
+				E0127E271E1825AF001A374B /* Sources */,
+				E0127E281E1825AF001A374B /* Frameworks */,
+				E0127E291E1825AF001A374B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Chat App Demo Programmatic";
+			productName = "Chat App Demo Programmatic";
+			productReference = E0127E2B1E1825AF001A374B /* Chat App Demo Programmatic.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E0127E231E1825AF001A374B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = CeriOS;
+				TargetAttributes = {
+					E0127E2A1E1825AF001A374B = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = AS82F53XC3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E0127E261E1825AF001A374B /* Build configuration list for PBXProject "Chat App Demo Programmatic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E0127E221E1825AF001A374B;
+			productRefGroup = E0127E2C1E1825AF001A374B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E0127E2A1E1825AF001A374B /* Chat App Demo Programmatic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E0127E291E1825AF001A374B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0127E391E1825AF001A374B /* LaunchScreen.storyboard in Resources */,
+				E0127E361E1825AF001A374B /* Assets.xcassets in Resources */,
+				E0127E341E1825AF001A374B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E0127E271E1825AF001A374B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0127E311E1825AF001A374B /* ViewController.swift in Sources */,
+				E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E0127E321E1825AF001A374B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E0127E331E1825AF001A374B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E0127E371E1825AF001A374B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E0127E381E1825AF001A374B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E0127E3B1E1825AF001A374B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E0127E3C1E1825AF001A374B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E0127E3E1E1825AF001A374B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AS82F53XC3;
+				INFOPLIST_FILE = "Chat App Demo Programmatic/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "CeriOS.Chat-App-Demo-Programmatic";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E0127E3F1E1825AF001A374B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AS82F53XC3;
+				INFOPLIST_FILE = "Chat App Demo Programmatic/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "CeriOS.Chat-App-Demo-Programmatic";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E0127E261E1825AF001A374B /* Build configuration list for PBXProject "Chat App Demo Programmatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0127E3B1E1825AF001A374B /* Debug */,
+				E0127E3C1E1825AF001A374B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E0127E3D1E1825AF001A374B /* Build configuration list for PBXNativeTarget "Chat App Demo Programmatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0127E3E1E1825AF001A374B /* Debug */,
+				E0127E3F1E1825AF001A374B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E0127E231E1825AF001A374B /* Project object */;
+}
