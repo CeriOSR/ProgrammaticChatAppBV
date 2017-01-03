@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9CBA8514808D956A85822F4 /* Pods_Chat_App_Demo_Programmatic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8538691D535CF769074DAADB /* Pods_Chat_App_Demo_Programmatic.framework */; };
 		E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E2E1E1825AF001A374B /* AppDelegate.swift */; };
-		E0127E311E1825AF001A374B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E301E1825AF001A374B /* ViewController.swift */; };
+		E0127E311E1825AF001A374B /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E301E1825AF001A374B /* MessagesController.swift */; };
 		E0127E341E1825AF001A374B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0127E321E1825AF001A374B /* Main.storyboard */; };
 		E0127E361E1825AF001A374B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0127E351E1825AF001A374B /* Assets.xcassets */; };
 		E0127E391E1825AF001A374B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0127E371E1825AF001A374B /* LaunchScreen.storyboard */; };
+		E0127E421E1828AC001A374B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0127E411E1828AC001A374B /* LoginController.swift */; };
+		E0127E441E1A289D001A374B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0127E431E1A289D001A374B /* GoogleService-Info.plist */; };
+		E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A181E1E1AF245002AA60C /* NewMessageController.swift */; };
+		E08A18221E1AF848002AA60C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18211E1AF848002AA60C /* User.swift */; };
+		E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18231E1B191A002AA60C /* LoginController+Handler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8538691D535CF769074DAADB /* Pods_Chat_App_Demo_Programmatic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat_App_Demo_Programmatic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A67AB98886D3AF1A2DC24FF5 /* Pods-Chat App Demo Programmatic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App Demo Programmatic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chat App Demo Programmatic/Pods-Chat App Demo Programmatic.release.xcconfig"; sourceTree = "<group>"; };
+		CE27065AE6AE3C5D04B698CF /* Pods-Chat App Demo Programmatic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App Demo Programmatic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chat App Demo Programmatic/Pods-Chat App Demo Programmatic.debug.xcconfig"; sourceTree = "<group>"; };
 		E0127E2B1E1825AF001A374B /* Chat App Demo Programmatic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chat App Demo Programmatic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0127E2E1E1825AF001A374B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E0127E301E1825AF001A374B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E0127E301E1825AF001A374B /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		E0127E331E1825AF001A374B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E0127E351E1825AF001A374B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0127E381E1825AF001A374B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0127E3A1E1825AF001A374B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0127E411E1828AC001A374B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		E0127E431E1A289D001A374B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E08A181E1E1AF245002AA60C /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		E08A18211E1AF848002AA60C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E08A18231E1B191A002AA60C /* LoginController+Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+Handler.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9CBA8514808D956A85822F4 /* Pods_Chat_App_Demo_Programmatic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32EC5A739B637DF865524CF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE27065AE6AE3C5D04B698CF /* Pods-Chat App Demo Programmatic.debug.xcconfig */,
+				A67AB98886D3AF1A2DC24FF5 /* Pods-Chat App Demo Programmatic.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4FFB5599276B296DE04E3673 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8538691D535CF769074DAADB /* Pods_Chat_App_Demo_Programmatic.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E0127E221E1825AF001A374B = {
 			isa = PBXGroup;
 			children = (
 				E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */,
 				E0127E2C1E1825AF001A374B /* Products */,
+				32EC5A739B637DF865524CF0 /* Pods */,
+				4FFB5599276B296DE04E3673 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +88,35 @@
 		E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */ = {
 			isa = PBXGroup;
 			children = (
+				E08A18201E1AF827002AA60C /* Model */,
+				E0127E401E182858001A374B /* Controllers */,
 				E0127E2E1E1825AF001A374B /* AppDelegate.swift */,
-				E0127E301E1825AF001A374B /* ViewController.swift */,
 				E0127E321E1825AF001A374B /* Main.storyboard */,
 				E0127E351E1825AF001A374B /* Assets.xcassets */,
 				E0127E371E1825AF001A374B /* LaunchScreen.storyboard */,
 				E0127E3A1E1825AF001A374B /* Info.plist */,
+				E0127E431E1A289D001A374B /* GoogleService-Info.plist */,
 			);
 			path = "Chat App Demo Programmatic";
+			sourceTree = "<group>";
+		};
+		E0127E401E182858001A374B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0127E411E1828AC001A374B /* LoginController.swift */,
+				E0127E301E1825AF001A374B /* MessagesController.swift */,
+				E08A181E1E1AF245002AA60C /* NewMessageController.swift */,
+				E08A18231E1B191A002AA60C /* LoginController+Handler.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E08A18201E1AF827002AA60C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E08A18211E1AF848002AA60C /* User.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +126,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0127E3D1E1825AF001A374B /* Build configuration list for PBXNativeTarget "Chat App Demo Programmatic" */;
 			buildPhases = (
+				E9FDD433A890001A9AE882AC /* [CP] Check Pods Manifest.lock */,
 				E0127E271E1825AF001A374B /* Sources */,
 				E0127E281E1825AF001A374B /* Frameworks */,
 				E0127E291E1825AF001A374B /* Resources */,
+				6EEC5D60DDC7C1E9D27210AF /* [CP] Embed Pods Frameworks */,
+				C07858C2989841535F7B2455 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0127E391E1825AF001A374B /* LaunchScreen.storyboard in Resources */,
+				E0127E441E1A289D001A374B /* GoogleService-Info.plist in Resources */,
 				E0127E361E1825AF001A374B /* Assets.xcassets in Resources */,
 				E0127E341E1825AF001A374B /* Main.storyboard in Resources */,
 			);
@@ -132,12 +191,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6EEC5D60DDC7C1E9D27210AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chat App Demo Programmatic/Pods-Chat App Demo Programmatic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C07858C2989841535F7B2455 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chat App Demo Programmatic/Pods-Chat App Demo Programmatic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9FDD433A890001A9AE882AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E0127E271E1825AF001A374B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0127E311E1825AF001A374B /* ViewController.swift in Sources */,
+				E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */,
+				E0127E311E1825AF001A374B /* MessagesController.swift in Sources */,
+				E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */,
+				E0127E421E1828AC001A374B /* LoginController.swift in Sources */,
+				E08A18221E1AF848002AA60C /* User.swift in Sources */,
 				E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +370,7 @@
 		};
 		E0127E3E1E1825AF001A374B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE27065AE6AE3C5D04B698CF /* Pods-Chat App Demo Programmatic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AS82F53XC3;
@@ -272,6 +384,7 @@
 		};
 		E0127E3F1E1825AF001A374B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A67AB98886D3AF1A2DC24FF5 /* Pods-Chat App Demo Programmatic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AS82F53XC3;
@@ -302,6 +415,7 @@
 				E0127E3F1E1825AF001A374B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
