@@ -11,6 +11,9 @@ import Firebase
 
 class LoginController: UIViewController {
     
+    //cannot add a property in extension is the reason we declaring this here but using it in extension
+    var messagesController: MessagesController?
+    
     //input container
     let inputContainerView: UIView = {
         let view = UIView()
@@ -59,7 +62,8 @@ class LoginController: UIViewController {
                 print(error ?? "")
                 return
             }
-            //logged in the user to firebase
+            //logged in the user to firebase. calling fetchUserAndSetupNavBarTitle() will change the nav bar title appropriately
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismiss(animated: true, completion: nil)
             
         })

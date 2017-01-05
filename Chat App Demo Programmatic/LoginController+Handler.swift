@@ -30,10 +30,10 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             //this generates a unique uid and we'll use this as a name for our image so we have a unique name for every image
             let imageName = NSUUID().uuidString
             
-            let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).png")
+            let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
             
-            //need to unwrap this variable
-            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            //unwrapping self.profileImageView.image JPEG to compress from PNG and 0.1 is 10% of original.
+            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 
                 storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                     
@@ -72,6 +72,11 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 return
                 
             }
+            //This is to change nav bar title even after registering. using the below to avoid another call/download to firebase
+            //use user instead of values but pass values into user class by:
+            let user = User()
+            user.setValuesForKeys(values)
+            self.messagesController?.setupNavBarWithUser(user: user)
             
             self.dismiss(animated: true, completion: nil)
             

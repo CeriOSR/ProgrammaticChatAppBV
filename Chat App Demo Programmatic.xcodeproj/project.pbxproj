@@ -18,6 +18,9 @@
 		E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A181E1E1AF245002AA60C /* NewMessageController.swift */; };
 		E08A18221E1AF848002AA60C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18211E1AF848002AA60C /* User.swift */; };
 		E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18231E1B191A002AA60C /* LoginController+Handler.swift */; };
+		E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62061E1CAF0600E6D982 /* Extensions.swift */; };
+		E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */; };
+		E0DA620B1E1E216700E6D982 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620A1E1E216700E6D982 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		E08A181E1E1AF245002AA60C /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		E08A18211E1AF848002AA60C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E08A18231E1B191A002AA60C /* LoginController+Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+Handler.swift"; sourceTree = "<group>"; };
+		E0DA62061E1CAF0600E6D982 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		E0DA620A1E1E216700E6D982 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,7 @@
 		E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */ = {
 			isa = PBXGroup;
 			children = (
+				E0DA62051E1CAEDD00E6D982 /* Helpers */,
 				E08A18201E1AF827002AA60C /* Model */,
 				E0127E401E182858001A374B /* Controllers */,
 				E0127E2E1E1825AF001A374B /* AppDelegate.swift */,
@@ -107,6 +114,7 @@
 				E0127E301E1825AF001A374B /* MessagesController.swift */,
 				E08A181E1E1AF245002AA60C /* NewMessageController.swift */,
 				E08A18231E1B191A002AA60C /* LoginController+Handler.swift */,
+				E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -115,8 +123,17 @@
 			isa = PBXGroup;
 			children = (
 				E08A18211E1AF848002AA60C /* User.swift */,
+				E0DA620A1E1E216700E6D982 /* Message.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E0DA62051E1CAEDD00E6D982 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E0DA62061E1CAF0600E6D982 /* Extensions.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,9 +264,12 @@
 				E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */,
 				E0127E311E1825AF001A374B /* MessagesController.swift in Sources */,
 				E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */,
+				E0DA620B1E1E216700E6D982 /* Message.swift in Sources */,
+				E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */,
 				E0127E421E1828AC001A374B /* LoginController.swift in Sources */,
 				E08A18221E1AF848002AA60C /* User.swift in Sources */,
 				E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */,
+				E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
