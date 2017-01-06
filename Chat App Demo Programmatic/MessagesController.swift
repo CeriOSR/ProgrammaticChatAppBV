@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class MessagesController: UITableViewController {
+    
+    let cellId = "cellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +22,15 @@ class MessagesController: UITableViewController {
         
         checkIfUserIsLoggedIn()
         
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        
         observeMessages()
         
     }
+    
+    //use to store messages
+    var messages = [Message]()
+    var messagesDictionary = [String: Message]()
     
     func observeMessages() {
         
@@ -33,12 +41,49 @@ class MessagesController: UITableViewController {
                 
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-                print(message.text ?? "")
+                //self.messages.append(message)
                 
+                //were trying to set up a dictionary of [toId: Messages] with 1 message per toId...working on getting the latest message per Id.
+                if let toId = message.toId {
+                    self.messagesDictionary[toId] = message
+                    //messages is an array so we convert the messagesDictionary into an array...Confusing? Yes!!!
+                    self.messages = Array(self.messagesDictionary.values)
+                    
+                    //this is how you sort an array, so our tableView are sorted by timestamp in decending order
+                    self.messages.sort(by: { (message1, message2) -> Bool in
+                        return (message1.timeStamp?.intValue)! > (message2.timeStamp?.intValue)!
+                    })
+                
+                }
+                
+                //this will crash because its on background thread, so lets dispatch this to be async with main thread
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+
+                }
             }
             
         }, withCancel: nil)
         
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    //changes height of cells
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
+        
+        let message = messages[indexPath.row]
+        cell.message = message
+        
+        return cell
     }
     
     func handleNewMessage() {

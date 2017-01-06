@@ -21,6 +21,7 @@
 		E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62061E1CAF0600E6D982 /* Extensions.swift */; };
 		E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */; };
 		E0DA620B1E1E216700E6D982 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620A1E1E216700E6D982 /* Message.swift */; };
+		E0DA620E1E1F25EC00E6D982 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620D1E1F25EC00E6D982 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		E0DA62061E1CAF0600E6D982 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		E0DA620A1E1E216700E6D982 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E0DA620D1E1F25EC00E6D982 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */ = {
 			isa = PBXGroup;
 			children = (
+				E0DA620C1E1F25D000E6D982 /* View */,
 				E0DA62051E1CAEDD00E6D982 /* Helpers */,
 				E08A18201E1AF827002AA60C /* Model */,
 				E0127E401E182858001A374B /* Controllers */,
@@ -134,6 +137,14 @@
 				E0DA62061E1CAF0600E6D982 /* Extensions.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E0DA620C1E1F25D000E6D982 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0DA620D1E1F25EC00E6D982 /* UserCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 				E0127E421E1828AC001A374B /* LoginController.swift in Sources */,
 				E08A18221E1AF848002AA60C /* User.swift in Sources */,
 				E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */,
+				E0DA620E1E1F25EC00E6D982 /* UserCell.swift in Sources */,
 				E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
