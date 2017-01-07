@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MessagesController.swift
 //  Chat App Demo Programmatic
 //
 //  Created by Rey Cerio on 2016-12-31.
@@ -24,7 +24,7 @@ class MessagesController: UITableViewController {
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
-        observeMessages()
+        //observeMessages()
         
     }
     
@@ -32,38 +32,75 @@ class MessagesController: UITableViewController {
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
     
-    func observeMessages() {
+    //observing only last message per user by fanning out
+    func obeserveUserMessages() {
         
-        let ref = FIRDatabase.database().reference().child("messages")
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        //first we observe the id's of the messages that belongs to current user in the "user-messages" node
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+
         ref.observe(.childAdded, with: { (snapshot) in
+            
+            let userId = snapshot.key
+            //added another node to specify both parties and reduce the fetch request...hence reduce cost!!!!!!!!!
+            FIRDatabase.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+                
+                let messageId = snapshot.key
+                self.fetchMessageWithMessageId(messageId: messageId)
+                
+            }, withCancel: nil)
+        
+        }, withCancel: nil)
+        
+    }
+    
+    private func fetchMessageWithMessageId(messageId: String) {
+        let messageReference = FIRDatabase.database().reference().child("messages").child(messageId)
+        //then we observe the messages that has those ids under the current user id and append it to a dictionary
+        messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-                //self.messages.append(message)
                 
                 //were trying to set up a dictionary of [toId: Messages] with 1 message per toId...working on getting the latest message per Id.
                 if let toId = message.toId {
                     self.messagesDictionary[toId] = message
-                    //messages is an array so we convert the messagesDictionary into an array...Confusing? Yes!!!
-                    self.messages = Array(self.messagesDictionary.values)
                     
-                    //this is how you sort an array, so our tableView are sorted by timestamp in decending order
-                    self.messages.sort(by: { (message1, message2) -> Bool in
-                        return (message1.timeStamp?.intValue)! > (message2.timeStamp?.intValue)!
-                    })
-                
                 }
-                
-                //this will crash because its on background thread, so lets dispatch this to be async with main thread
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-
-                }
+                self.attemptReloadTable()
             }
             
         }, withCancel: nil)
+
+    }
+    
+    private func attemptReloadTable() {
+        //we put a delay on the reloading so reduce the number of time to 1 and get rid of the flickering also the wrong images on cells.
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
+    
+    //reference to timer so we can invalidate it
+    var timer: Timer?
+    
+    //we put the constructing of array and reloading of table in this method so we can call it in a timer(#selector)
+    //reason being, we only wanna do this at the end of all fetching, not everytime it fetches. This saves user battery.
+    func handleReloadTable() {
+        
+        //messages is an array so we convert the messagesDictionary into an array...Confusing? Yes!!!
+        self.messages = Array(self.messagesDictionary.values)
+        
+        //this is how you sort an array, so our tableView are sorted by timestamp in decending order
+        self.messages.sort(by: { (message1, message2) -> Bool in
+            return (message1.timeStamp?.intValue)! > (message2.timeStamp?.intValue)!
+        })
+        
+        //this will crash because its on background thread, so lets dispatch this to be async with main thread
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
     }
     
@@ -84,6 +121,27 @@ class MessagesController: UITableViewController {
         cell.message = message
         
         return cell
+    }
+    
+    //when you select a user you wanna talk to
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatPartnerId() else {return}
+        
+        let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            //assingning the chosen user's data into a dictionary variable
+            guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
+            
+            let user = User()
+            //setting the id so when we save to firebase it will be set
+            user.id = chatPartnerId
+            user.setValuesForKeys(dictionary)
+            self.showChatControllerForUser(user: user)
+
+        }, withCancel: nil)
+        
     }
     
     func handleNewMessage() {
@@ -132,6 +190,12 @@ class MessagesController: UITableViewController {
     }
     
     func setupNavBarWithUser(user: User) {
+        
+        //We call these 4 methods here instead of in viewDidLoad() so that it clears the table and only show what  ObeserveUserMessages returns...
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        obeserveUserMessages()
         
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)

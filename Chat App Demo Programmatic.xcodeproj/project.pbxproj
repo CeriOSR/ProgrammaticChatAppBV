@@ -22,6 +22,7 @@
 		E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */; };
 		E0DA620B1E1E216700E6D982 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620A1E1E216700E6D982 /* Message.swift */; };
 		E0DA620E1E1F25EC00E6D982 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620D1E1F25EC00E6D982 /* UserCell.swift */; };
+		E0DA62101E2078C700E6D982 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620F1E2078C700E6D982 /* ChatMessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		E0DA620A1E1E216700E6D982 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E0DA620D1E1F25EC00E6D982 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		E0DA620F1E2078C700E6D982 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				E0DA620D1E1F25EC00E6D982 /* UserCell.swift */,
+				E0DA620F1E2078C700E6D982 /* ChatMessageCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */,
 				E0127E421E1828AC001A374B /* LoginController.swift in Sources */,
 				E08A18221E1AF848002AA60C /* User.swift in Sources */,
+				E0DA62101E2078C700E6D982 /* ChatMessageCell.swift in Sources */,
 				E0127E2F1E1825AF001A374B /* AppDelegate.swift in Sources */,
 				E0DA620E1E1F25EC00E6D982 /* UserCell.swift in Sources */,
 				E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */,

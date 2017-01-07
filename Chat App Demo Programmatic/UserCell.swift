@@ -17,25 +17,7 @@ class UserCell: UITableViewCell {
         
         didSet{
             
-            if let toId = message?.toId {
-                
-                let ref = FIRDatabase.database().reference().child("users").child(toId)
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    print(snapshot)
-                    
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        
-                        self.textLabel?.text = dictionary["name"] as? String
-                        
-                        if let profileImageUrl = dictionary["profileImageUrl"] {
-                            
-                            self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl as! String)
-                            
-                        }
-                    }
-                }, withCancel: nil)
-                
-            }
+            setupNameAndProfileImage()
             
             detailTextLabel?.text = message?.text
             
@@ -48,6 +30,32 @@ class UserCell: UITableViewCell {
    
             }
             
+            
+        }
+        
+    }
+    
+    
+    private func setupNameAndProfileImage(){
+        
+        //accessing the didSet of the message var
+        //calling method in Message model that makes sure its not the current user thats posted in the table.
+        if let id = message?.chatPartnerId() {
+            
+            let ref = FIRDatabase.database().reference().child("users").child(id)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    
+                    self.textLabel?.text = dictionary["name"] as? String
+                    
+                    if let profileImageUrl = dictionary["profileImageUrl"] {
+                        
+                        self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl as! String)
+                        
+                    }
+                }
+            }, withCancel: nil)
             
         }
         
@@ -75,7 +83,6 @@ class UserCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "hh:mm:ss"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false

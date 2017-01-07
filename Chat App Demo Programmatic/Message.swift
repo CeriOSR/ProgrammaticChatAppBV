@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class Message: NSObject {
     
@@ -14,5 +15,19 @@ class Message: NSObject {
     var text: String?
     var timeStamp: NSNumber?
     var toId: String?
+    
+    func chatPartnerId() -> String? {
+        
+        //we dont want the table to always display the toId name and image so this IF statement is the fix.
+        //this will make it so it its never the current users image and name thats printed on the table.
+        if fromId == FIRAuth.auth()?.currentUser?.uid {
+            return toId!
+        } else {
+            return fromId!
+        }
+        
+        //return (fromId == FIRAuth.auth()?.currentUser?.uid ? toId : fromId)! //one liner version of the if statement
+
+    }
     
 }
