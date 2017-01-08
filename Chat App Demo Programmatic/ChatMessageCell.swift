@@ -10,6 +10,9 @@ import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
     
+    //reference to ChatLogController because we dont want the zoom method in the cell class instead in the viewController
+    var chatLogController: ChatLogController?
+    
     let textView: UITextView = {
         
         let tv = UITextView()
@@ -46,6 +49,25 @@ class ChatMessageCell: UICollectionViewCell {
         return imageView
     }()
     
+    lazy var messageImageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
+        return imageView
+
+    }()
+    
+    //calls a zoom in logic from chatlogcontroller
+    func handleZoomTap(tapGesture: UITapGestureRecognizer) {
+        guard let imageView = tapGesture.view as? UIImageView else {return}
+        self.chatLogController?.performZoomInForStartingImageView(startingImageView: imageView)
+    }
+    
     //reference to bubbleView to be used to adjust
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
@@ -59,6 +81,14 @@ class ChatMessageCell: UICollectionViewCell {
         addSubview(bubbleView)
         addSubview(textView)
         addSubview(profileImageView)
+        
+        bubbleView.addSubview(messageImageView)
+        
+        //ios9 constraints x, y, w, h
+        messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
         
         //ios9 constraints x, y, w, h
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true

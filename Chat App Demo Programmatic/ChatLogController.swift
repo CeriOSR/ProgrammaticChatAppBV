@@ -11,7 +11,7 @@ import Firebase
 
 //**2 WAYS OF MOVING THE INPUT CONTAINER VIEW VIA MOVING NOTIFICATIONS AND inputAccessoryView...pick one!
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let cellId = "cellId"
     
@@ -68,6 +68,20 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
         containerView.backgroundColor = .white
         
+        let uploadImageView = UIImageView()
+        uploadImageView.image = UIImage(named: "upload_image_icon")
+        uploadImageView.translatesAutoresizingMaskIntoConstraints = false
+        uploadImageView.isUserInteractionEnabled = true
+        uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
+        containerView.addSubview(uploadImageView)
+        
+        //ios9 constraints x, y, w, h recomended size by apple is 44w44h
+        uploadImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        uploadImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        uploadImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        uploadImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        
         //type: .system to give the button a downstate
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Send", for: .normal)
@@ -85,7 +99,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         
         //ios9 constraints x, y, w, h
-        self.inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
+        self.inputTextField.leftAnchor.constraint(equalTo: uploadImageView.rightAnchor, constant: 8).isActive = true
         self.inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         self.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8).isActive = true
         self.inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
@@ -105,6 +119,92 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         return containerView
         
     }()
+    
+    func handleUploadTap(){
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.allowsEditing = true
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info["UIImagePickerControllerEditedImage"]{
+            
+            selectedImageFromPicker = (editedImage as AnyObject) as? UIImage
+            
+        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] {
+            
+            selectedImageFromPicker = (originalImage as AnyObject) as? UIImage
+            
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            
+            uploadToFirebaseStorageUsingImage(image: selectedImage)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+
+        
+    }
+    
+    //gets called imagePickerController() "choose" button
+    private func uploadToFirebaseStorageUsingImage(image: UIImage) {
+        let imageName = NSUUID().uuidString
+        let ref = FIRStorage.storage().reference().child("messages_images").child(imageName)
+        
+        if let uploadData = UIImageJPEGRepresentation(image, 0.2) {
+            ref.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                
+                if error != nil {
+                    print("Failed to upload image.", error ?? "")
+                    return
+                }
+                if let imageUrl = metadata?.downloadURL()?.absoluteString {
+                    self.sendMessageWithImageUrl(imageUrl: imageUrl)
+                }
+                
+            })
+        }
+        
+    }
+    
+    //gets called by the uploadToFirebaseStorageUsingImage()
+    private func sendMessageWithImageUrl(imageUrl: String){
+        let ref = FIRDatabase.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        let toId = user!.id!
+        let fromId = FIRAuth.auth()?.currentUser?.uid
+        let timeStamp: NSNumber = Int(NSDate().timeIntervalSince1970) as NSNumber
+        let values = ["imageUrl": imageUrl, "toId": toId, "fromId": fromId ?? "", "timeStamp": timeStamp] as [String : Any]
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            
+            if error != nil {
+                print(error!)
+            }
+            
+            let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId!).child(toId)
+            let messageId = childRef.key
+            userMessagesRef.updateChildValues([messageId: 1])
+            
+            let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId).child(fromId!)
+            recipientUserMessagesRef.updateChildValues([messageId: 1])
+            
+        }
+        
+    }
     
     override var inputAccessoryView: UIView? {
         
@@ -126,14 +226,26 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
         
+        //reference to ChatLogController from ChatMessageCell
+        cell.chatLogController = self   
+        
         //individualizing the members of the array for each cell
         let message = messages[indexPath.item]
         cell.textView.text = message.text
         
         setupCell(cell: cell, message: message)
         
-        //modifying the bubbleView's width
-        cell.bubbleWidthAnchor?.constant = estimateFrameForTex(text: message.text!).width + 32
+        //modifying the bubbleView's width..hide textView in else so its not on top of the image so we can tap it
+        if let text = message.text {
+            cell.bubbleWidthAnchor?.constant = estimateFrameForTex(text: text).width + 32
+            cell.textView.isHidden = false
+        } else {
+            
+            cell.bubbleWidthAnchor?.constant = 200
+            cell.textView.isHidden = true
+        }
+
+        
         
         return cell
     }
@@ -163,6 +275,15 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleViewRightAnchor?.isActive = false
             cell.bubbleViewLeftAnchor?.isActive = true
             
+        }
+        
+        //picks between the imageView or view that displays text if downloaded is either text or image
+        if let messageImageUrl = message.imageUrl {
+            cell.messageImageView.loadImageUsingCacheWithUrlString(urlString: messageImageUrl)
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = .clear
+        } else {
+            cell.messageImageView.isHidden = true
         }
         
     }
@@ -369,4 +490,94 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         return true
     }
     
+    //references needed for zooming in and zooming out
+    var startingFrame: CGRect?
+    var blackBackgroundview: UIView?
+    var startingImageView: UIImageView?
+    
+    //custom zoom method using ios9 constraints
+    func performZoomInForStartingImageView(startingImageView: UIImageView) {
+        
+        //hiding the startingImageView once clicked
+        self.startingImageView = startingImageView
+        self.startingImageView?.isHidden = true
+        
+        startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
+        
+        let zoomingImageView = UIImageView(frame: startingFrame!)
+        zoomingImageView.backgroundColor = UIColor.red
+        zoomingImageView.image = startingImageView.image
+        zoomingImageView.isUserInteractionEnabled = true
+        zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlZoomOut)))
+        
+        if let keyWindow = UIApplication.shared.keyWindow {
+            
+            blackBackgroundview = UIView(frame: keyWindow.frame)
+            blackBackgroundview?.backgroundColor = UIColor.black
+            blackBackgroundview?.alpha = 0
+            //added before the zoomingImageView so it ends up behind it
+            keyWindow.addSubview(blackBackgroundview!)
+            keyWindow.addSubview(zoomingImageView)
+            
+            //animating back out to controller, better animate() can control damping and velocity
+            UIView.animate(withDuration: 0.05, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                //animating the blackbackground too
+                self.blackBackgroundview!.alpha = 1
+                self.inputContainerView.alpha = 0
+                
+                //ready for some math? we know the (original height: h1) and we know the (original width: w1) we also know (end width: w2). find the h2
+                //formula is h1/w1 = h2/w2.......h2 = (h1/w1) * w2
+                let height2 = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+                
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height2)
+                
+                zoomingImageView.center = keyWindow.center
+
+                
+            }, completion: { (completed: Bool) in
+                //do nothing
+                
+            })
+
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                //animating the blackbackground too
+                self.blackBackgroundview!.alpha = 1
+                self.inputContainerView.alpha = 0
+                
+                //ready for some math. we know the (original height: h1) and we know the (original width: w1) we also know (end width: w2). find the h2
+                //formula is h1/w1 = h2/w2.......h2 = (h1/w1) * w2
+                let height2 = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+                
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height2)
+                
+                zoomingImageView.center = keyWindow.center
+                
+                
+            }, completion: nil)
+
+        }
+        
+    }
+    
+    func handlZoomOut(tapGesture: UITapGestureRecognizer) {
+        //when screen is tapped
+        if let zoomOutImageView = tapGesture.view {
+            zoomOutImageView.layer.cornerRadius = 16
+            zoomOutImageView.clipsToBounds = true
+            
+            //animating back out to controller, better animate() can control damping and velocity
+            UIView.animate(withDuration: 0.05, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                zoomOutImageView.frame = self.startingFrame!
+                self.blackBackgroundview?.alpha = 0
+                self.inputContainerView.alpha = 1
+            }, completion: { (completed: Bool) in
+                //completely remove traces of zoomOutImageView
+                zoomOutImageView.removeFromSuperview()
+                self.startingImageView?.isHidden = false
+            })
+        }
+    }
 }

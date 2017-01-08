@@ -16,6 +16,8 @@ class Message: NSObject {
     var timeStamp: NSNumber?
     var toId: String?
     
+    var imageUrl: String?
+    
     func chatPartnerId() -> String? {
         
         //we dont want the table to always display the toId name and image so this IF statement is the fix.
