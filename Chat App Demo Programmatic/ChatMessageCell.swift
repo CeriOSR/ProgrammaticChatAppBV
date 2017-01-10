@@ -7,11 +7,64 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ChatMessageCell: UICollectionViewCell {
     
     //reference to ChatLogController because we dont want the zoom method in the cell class instead in the viewController
     var chatLogController: ChatLogController?
+    //reference to Message class 
+    var message: Message?
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        
+        let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
+    //setting up a play button
+    lazy var playButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(named: "play")
+        button.tintColor = .white
+        button.setImage(image, for: .normal)
+        
+        button.addTarget(self, action: #selector(handlePlay), for: .touchUpInside)
+        return button
+    }()
+    
+    var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
+    
+    //setting up a player and a playerLayer
+    func handlePlay() {
+        //unwrapping 2 things at once
+        if let videoUrlString = message?.videoUrl, let url = NSURL(string: videoUrlString) {
+            //setting up the player inside the bounds of the bubbleView
+            player = AVPlayer(url: url as URL)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = bubbleView.bounds
+            bubbleView.layer.addSublayer(playerLayer!)
+            
+            player?.play()
+            activityIndicator.startAnimating()
+            playButton.isHidden = true
+        }
+
+    }
+    
+    
+    //when you scroll up or down and the cell is our view, it will reuse the cell and execute the following.
+    //THIS IS THE SOLUTION TO OUR MESSENGER APP BEFORE WHEN WRONG CELLS WERE SHOWING
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerLayer?.removeFromSuperlayer()
+        player?.pause()
+        activityIndicator.stopAnimating()
+    }
     
     let textView: UITextView = {
         
@@ -21,6 +74,7 @@ class ChatMessageCell: UICollectionViewCell {
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor.clear
         tv.textColor = .white
+        tv.isEditable = false  //default to true
         return tv
         
     }()
@@ -64,6 +118,11 @@ class ChatMessageCell: UICollectionViewCell {
     
     //calls a zoom in logic from chatlogcontroller
     func handleZoomTap(tapGesture: UITapGestureRecognizer) {
+        //no zoom if its a video
+        if message?.videoUrl != nil {
+            return
+        }
+        
         guard let imageView = tapGesture.view as? UIImageView else {return}
         self.chatLogController?.performZoomInForStartingImageView(startingImageView: imageView)
     }
@@ -89,6 +148,23 @@ class ChatMessageCell: UICollectionViewCell {
         messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
         messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
         messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
+        
+        bubbleView.addSubview(playButton)
+        
+        //ios9 constraints x, y, w, h
+        playButton.centerXAnchor.constraint(equalTo: bubbleView.centerXAnchor).isActive = true
+        playButton.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
+        playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        bubbleView.addSubview(activityIndicator)
+        
+        //ios9 constraints x, y, w, h
+        activityIndicator.centerXAnchor.constraint(equalTo: bubbleView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         
         //ios9 constraints x, y, w, h
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true

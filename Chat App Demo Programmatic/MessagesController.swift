@@ -26,6 +26,45 @@ class MessagesController: UITableViewController {
         
         //observeMessages()
         
+        //1st of 3 steps needed to reveal the swipe to delete functionality
+        tableView.allowsMultipleSelectionDuringEditing = true
+        
+    }
+    
+    //2nd step needed to do swipe to delete functionality
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        
+        //no need to unwrap because its not an optional (var is just below this method)
+        let message = self.messages[indexPath.row]
+            
+        if let chatPartnerId = message.chatPartnerId() {
+            
+            FIRDatabase.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
+                if error != nil {
+                    
+                    print("failed to delete message", error ?? "")
+                    return
+                }
+                
+//                //one way of updating the table but not completely the right way because its unsafe because it deletes the reference but does not delete the actual message in "messages" child or from [messageDictionary]
+//                self.messages.remove(at: indexPath.row)
+//                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                //right way
+                self.messagesDictionary.removeValue(forKey: chatPartnerId)
+                self.attemptReloadTable()
+                
+            })
+            
+        }
+        
+        
     }
     
     //use to store messages
@@ -52,6 +91,12 @@ class MessagesController: UITableViewController {
         
         }, withCancel: nil)
         
+        //if we delete message from the outside source or manually in firebase, it should automatically be deleted in the app
+        ref.observe(.childRemoved, with: { (snapshot) in
+            self.messagesDictionary.removeValue(forKey: snapshot.key)
+            self.attemptReloadTable()
+        }, withCancel: nil)
+        
     }
     
     private func fetchMessageWithMessageId(messageId: String) {
@@ -60,9 +105,8 @@ class MessagesController: UITableViewController {
         messageReference.observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                
-                let message = Message()
-                message.setValuesForKeys(dictionary)
+                //we placed a init constructor in the message model file so we dont have to set it here
+                let message = Message(dictionary: dictionary)
                 
                 //were trying to set up a dictionary of [toId: Messages] with 1 message per toId...working on getting the latest message per Id.
                 if let toId = message.toId {
