@@ -18,6 +18,7 @@
 		E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A181E1E1AF245002AA60C /* NewMessageController.swift */; };
 		E08A18221E1AF848002AA60C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18211E1AF848002AA60C /* User.swift */; };
 		E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A18231E1B191A002AA60C /* LoginController+Handler.swift */; };
+		E0923AA81E24946A005368F9 /* ChatInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0923AA71E249469005368F9 /* ChatInputContainerView.swift */; };
 		E0DA62071E1CAF0600E6D982 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62061E1CAF0600E6D982 /* Extensions.swift */; };
 		E0DA62091E1DB4E100E6D982 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */; };
 		E0DA620B1E1E216700E6D982 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DA620A1E1E216700E6D982 /* Message.swift */; };
@@ -41,6 +42,8 @@
 		E08A181E1E1AF245002AA60C /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		E08A18211E1AF848002AA60C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E08A18231E1B191A002AA60C /* LoginController+Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+Handler.swift"; sourceTree = "<group>"; };
+		E0923AA71E249469005368F9 /* ChatInputContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainerView.swift; sourceTree = "<group>"; };
+		E0923AA91E25C003005368F9 /* Chat App Demo Programmatic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Chat App Demo Programmatic.entitlements"; sourceTree = "<group>"; };
 		E0DA62061E1CAF0600E6D982 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E0DA62081E1DB4E100E6D982 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		E0DA620A1E1E216700E6D982 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		E0127E2D1E1825AF001A374B /* Chat App Demo Programmatic */ = {
 			isa = PBXGroup;
 			children = (
+				E0923AA91E25C003005368F9 /* Chat App Demo Programmatic.entitlements */,
 				E0DA620C1E1F25D000E6D982 /* View */,
 				E0DA62051E1CAEDD00E6D982 /* Helpers */,
 				E08A18201E1AF827002AA60C /* Model */,
@@ -146,6 +150,7 @@
 			children = (
 				E0DA620D1E1F25EC00E6D982 /* UserCell.swift */,
 				E0DA620F1E2078C700E6D982 /* ChatMessageCell.swift */,
+				E0923AA71E249469005368F9 /* ChatInputContainerView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -187,6 +192,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = AS82F53XC3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -276,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E08A181F1E1AF245002AA60C /* NewMessageController.swift in Sources */,
+				E0923AA81E24946A005368F9 /* ChatInputContainerView.swift in Sources */,
 				E0127E311E1825AF001A374B /* MessagesController.swift in Sources */,
 				E08A18241E1B191A002AA60C /* LoginController+Handler.swift in Sources */,
 				E0DA620B1E1E216700E6D982 /* Message.swift in Sources */,
@@ -409,6 +420,7 @@
 			baseConfigurationReference = CE27065AE6AE3C5D04B698CF /* Pods-Chat App Demo Programmatic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Chat App Demo Programmatic/Chat App Demo Programmatic.entitlements";
 				DEVELOPMENT_TEAM = AS82F53XC3;
 				INFOPLIST_FILE = "Chat App Demo Programmatic/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -423,6 +435,7 @@
 			baseConfigurationReference = A67AB98886D3AF1A2DC24FF5 /* Pods-Chat App Demo Programmatic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Chat App Demo Programmatic/Chat App Demo Programmatic.entitlements";
 				DEVELOPMENT_TEAM = AS82F53XC3;
 				INFOPLIST_FILE = "Chat App Demo Programmatic/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

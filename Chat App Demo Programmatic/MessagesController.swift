@@ -109,9 +109,13 @@ class MessagesController: UITableViewController {
                 let message = Message(dictionary: dictionary)
                 
                 //were trying to set up a dictionary of [toId: Messages] with 1 message per toId...working on getting the latest message per Id.
-                if let toId = message.toId {
-                    self.messagesDictionary[toId] = message
+//                if let toId = message.toId {
+//                    self.messagesDictionary[toId] = message
+//                    
+//                }
+                if let chatPartnerId = message.chatPartnerId() {
                     
+                    self.messagesDictionary[chatPartnerId] = message
                 }
                 self.attemptReloadTable()
             }

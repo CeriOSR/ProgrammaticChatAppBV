@@ -34,14 +34,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     //messages array of type Message to store the messages
     var messages = [Message]()
     
-    lazy var inputTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Message..."
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.delegate = self
-        return tf
-    }()
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,61 +57,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     //lazy var to access self
     //used by inputAccessoryView and canBecomeFirstResponder to make the inputContainer and keyboard interactive by swipes
-    lazy var inputContainerView: UIView = {
+    lazy var inputContainerView: ChatInputContainerView = {
         
-        let containerView = UIView()
-        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
-        containerView.backgroundColor = .white
-        
-        let uploadImageView = UIImageView()
-        uploadImageView.image = UIImage(named: "upload_image_icon")
-        uploadImageView.translatesAutoresizingMaskIntoConstraints = false
-        uploadImageView.isUserInteractionEnabled = true
-        uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadTap)))
-        containerView.addSubview(uploadImageView)
-        
-        //ios9 constraints x, y, w, h recomended size by apple is 44w44h
-        uploadImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        uploadImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        uploadImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        uploadImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-        
-        //type: .system to give the button a downstate
-        let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Send", for: .normal)
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        
-        containerView.addSubview(sendButton)
-        containerView.addSubview(self.inputTextField)
-        
-        //ios9 constraints x, y, w, h
-        sendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-        sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
-        
-        
-        //ios9 constraints x, y, w, h
-        self.inputTextField.leftAnchor.constraint(equalTo: uploadImageView.rightAnchor, constant: 8).isActive = true
-        self.inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        self.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8).isActive = true
-        self.inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
-        
-        let separatorLineView = UIView()
-        separatorLineView.backgroundColor = .lightGray
-        separatorLineView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(separatorLineView)
-        
-        //ios9 constraints x, y, w, h
-        separatorLineView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorLineView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
-        
-        return containerView
+        let chatInputContainerView = ChatInputContainerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        chatInputContainerView.chatLogController = self 
+        return chatInputContainerView
         
     }()
     
@@ -491,7 +434,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         
         containerView.addSubview(sendButton)
-        containerView.addSubview(inputTextField)
+        containerView.addSubview(inputContainerView.inputTextField)
         
         //ios9 constraints x, y, w, h
         sendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
@@ -501,10 +444,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         
         //ios9 constraints x, y, w, h
-        inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
-        inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8).isActive = true
-        inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        inputContainerView.inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
+        inputContainerView.inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        inputContainerView.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8).isActive = true
+        inputContainerView.inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
         let separatorLineView = UIView()
         separatorLineView.backgroundColor = .lightGray
@@ -521,9 +464,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     func handleSend() {
         
-        let properties = ["text": inputTextField.text ?? ""] as [String : Any]
+        let properties = ["text": inputContainerView.inputTextField.text ?? ""] as [String : Any]
         sendMessageWithProperties(properties: properties  as [String: AnyObject])
-        inputTextField.text = nil
+        inputContainerView.inputTextField.text = nil
     }
     
     //gets called by the uploadToFirebaseStorageUsingImage()
@@ -571,13 +514,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
     }
 
-    
-    //use enter to send
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSend()
-        return true
-    }
-    
     //references needed for zooming in and zooming out
     var startingFrame: CGRect?
     var blackBackgroundview: UIView?
